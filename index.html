@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abdulrahman | Backend Developer Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #121212;
+            --bg-card: #1e1e1e;
+            --text-light: #e0e0e0;
+            --text-gray: #b0b0b0;
+            --accent-blue: #00bcd4;
+            --accent-blue-hover: #0097a7;
+            --border-color: #333;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background-color: var(--bg-card);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        nav a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 600;
+            padding: 0.5rem 1.5rem;
+            transition: color 0.3s ease, background-color 0.3s ease, border-radius 0.3s ease;
+            border-radius: 8px;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--accent-blue);
+            background-color: rgba(0, 189, 212, 0.1);
+        }
+
+        main {
+            padding: 2rem 0;
+            min-height: calc(100vh - 120px); /* Adjust based on header/footer height */
+        }
+
+        .page-section {
+            display: none;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        .page-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Home Page Styles */
+        .hero {
+            text-align: center;
+            padding: 6rem 20px;
+        }
+
+        .hero h1 {
+            font-size: clamp(2rem, 5vw, 4rem);
+            margin: 0;
+            color: var(--accent-blue);
+        }
+
+        .hero p {
+            font-size: clamp(1rem, 2vw, 1.5rem);
+            color: var(--text-gray);
+            max-width: 800px;
+            margin: 1rem auto;
+        }
+
+        .hero .cta-buttons {
+            margin-top: 2rem;
+        }
+
+        .btn {
+            background-color: var(--accent-blue);
+            color: var(--bg-dark);
+            text-decoration: none;
+            padding: 0.75rem 2rem;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            display: inline-block;
+        }
+
+        .btn:hover {
+            background-color: var(--accent-blue-hover);
+            transform: translateY(-2px);
+        }
+
+        /* Project Grid Styles */
+        .section-title {
+            text-align: center;
+            font-size: clamp(1.8rem, 3vw, 2.5rem);
+            margin-bottom: 2rem;
+            color: var(--accent-blue);
+        }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background-color: var(--bg-card);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .project-card-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .project-card-content {
+            padding: 1.5rem;
+        }
+
+        .project-card h3 {
+            margin-top: 0;
+            font-size: 1.5rem;
+            color: var(--accent-blue);
+        }
+
+        .project-card p {
+            color: var(--text-gray);
+            font-size: 0.95rem;
+        }
+
+        /* Case Study Styles (simulated) */
+        .case-study-content {
+            background-color: var(--bg-card);
+            padding: 2rem;
+            border-radius: 12px;
+        }
+
+        .case-study-content h2 {
+            font-size: clamp(1.5rem, 3vw, 2.2rem);
+            color: var(--accent-blue);
+            margin-top: 0;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .case-study-content h3 {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            margin-top: 2rem;
+        }
+
+        .case-study-content p, .case-study-content ul {
+            color: var(--text-gray);
+        }
+
+        .case-study-content ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .case-study-content li::before {
+            content: "•";
+            color: var(--accent-blue);
+            font-weight: bold;
+            display: inline-block;
+            width: 1em;
+            margin-left: -1em;
+        }
+
+        .case-study-links a {
+            color: var(--accent-blue);
+            text-decoration: none;
+            font-weight: 600;
+            margin-right: 1.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .case-study-links a:hover {
+            color: var(--accent-blue-hover);
+        }
+
+        /* General styles for about/contact */
+        .about-section, .contact-section {
+            background-color: var(--bg-card);
+            padding: 2rem;
+            border-radius: 12px;
+            margin-top: 2rem;
+        }
+
+        .about-section h2, .contact-section h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            color: var(--accent-blue);
+            margin-top: 0;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem 0;
+            color: var(--text-gray);
+            border-top: 1px solid var(--border-color);
+            margin-top: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                padding: 4rem 10px;
+            }
+            nav a {
+                padding: 0.5rem 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav class="container">
+            <a href="#" class="nav-link active" data-page="home">Home</a>
+            <a href="#" class="nav-link" data-page="projects">Projects</a>
+            <a href="#" class="nav-link" data-page="about">About</a>
+            <a href="#" class="nav-link" data-page="contact">Contact</a>
+        </nav>
+    </header>
+
+    <main class="container">
+        <!-- Home Page -->
+        <section id="home-page" class="page-section active">
+            <div class="hero">
+                <h1>Abdulrahman | Django & Python Backend Developer</h1>
+                <p>Building robust, scalable, and efficient web applications.</p>
+                <div class="cta-buttons">
+                    <a href="#" class="btn nav-link" data-page="projects">View My Projects</a>
+                    <a href="#" class="btn nav-link" data-page="contact" style="margin-left: 15px;">Get In Touch</a>
+                </div>
+            </div>
+            <h2 class="section-title">Featured Projects</h2>
+            <div id="featured-projects-grid" class="project-grid">
+                <!-- Featured project cards will be dynamically inserted here -->
+            </div>
+        </section>
+
+        <!-- Projects Page -->
+        <section id="projects-page" class="page-section">
+            <h2 class="section-title">My Projects</h2>
+            <div id="projects-list-grid" class="project-grid">
+                <!-- All project cards will be dynamically inserted here -->
+            </div>
+        </section>
+
+        <!-- About Page -->
+        <section id="about-page" class="page-section">
+            <div class="about-section">
+                <h2>About Abdulrahman</h2>
+                <p>Hello, I'm Abdulrahman, a dedicated backend web developer passionate about crafting robust and efficient web applications. With approximately 1.5 years of hands-on experience in Python and Django, I'm highly comfortable with core concepts like models, views, authentication, and URL routing. My strong problem-solving skills drive me to build reliable backend systems, and I'm actively expanding my expertise in API integration and JavaScript. I'm eager to contribute to impactful projects, whether as part of a team or through exciting freelance opportunities.</p>
+                
+                <h3>My Approach</h3>
+                <p>I believe in writing clean, maintainable, and well-tested code. My focus is on building scalable backend solutions that are not just functional but also performant and secure. I thrive on tackling complex logical challenges and optimizing data flows to deliver seamless user experiences.</p>
+                
+                <h3>Skills</h3>
+                <ul>
+                    <li><strong>Languages & Frameworks:</strong> Python, Django, Django REST Framework, HTML, CSS (Proficient for backend-driven interfaces)</li>
+                    <li><strong>Database:</strong> MySQL</li>
+                    <li><strong>Tools & Platforms:</strong> Git, GitHub, Docker, Postman, VS Code, AI-assisted Development</li>
+                    <li><strong>Key Django Concepts:</strong> Authentication & Authorization, ORM & Advanced Querying, Views (FBV/CBV) & Models, URL Routing & Middleware, Static/Media File Management, Django Template Language, Testing (Unit/Integration), API Design (RESTful)</li>
+                    <li><strong>Soft Skills:</strong> Problem-solving, Adaptability, Continuous Learning, Attention to Detail</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Contact Page -->
+        <section id="contact-page" class="page-section">
+            <div class="contact-section">
+                <h2>Get In Touch</h2>
+                <p>I'm always open to new opportunities, collaborations, or just a friendly chat. Feel free to reach out!</p>
+                <p>You can email me directly at: <strong>your.email@example.com</strong></p>
+                <p>Connect with me on:</p>
+                <ul>
+                    <li><a href="https://www.linkedin.com/in/your-linkedin-profile/" target="_blank">LinkedIn</a></li>
+                    <li><a href="https://github.com/your-github-username" target="_blank">GitHub</a></li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Dynamic Case Study Pages - Hidden until a project is clicked -->
+        <section id="case-study-page" class="page-section">
+            <div class="case-study-content">
+                <button onclick="showPage('projects')" class="btn" style="margin-bottom: 1.5rem;">← Back to Projects</button>
+                <div id="case-study-container">
+                    <!-- Case study details will be dynamically inserted here -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Abdulrahman. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // --- Simulated "Backend" Data ---
+        // This object represents the data a Django backend would serve via an API or Django template views.
+        const portfolioData = {
+            projects: [
+                {
+                    id: 'ecommerce-backend',
+                    title: 'E-commerce Backend System',
+                    short_description: 'A robust backend for an online store, handling user authentication, product management, and order processing.',
+                    hero_image_url: 'https://placehold.co/1100x450/000000/cccccc?text=E-commerce+Backend+Hero+Image',
+                    github_link: 'https://github.com/your-username/ecommerce-backend',
+                    live_demo_link: 'https://your-live-demo.com/ecommerce',
+                    is_featured: true,
+                    case_study: {
+                        problem: 'The client needed a secure, efficient platform to manage their online product catalog and handle user orders, previously done manually.',
+                        role: 'Lead Backend Developer',
+                        tech_stack: 'Python, Django, MySQL, Docker, Django REST Framework',
+                        architecture: 'The system comprises a Django backend handling API requests, an ORM layer interacting with MySQL, and asynchronous tasks for order processing. It is built to be modular and scalable.',
+                        key_decisions: 'Implemented a custom `AbstractUser` model with JWT authentication for secure API access. Designed a robust ORM schema for products and orders, leveraging Django’s ORM for efficient data management.',
+                        challenges: 'Faced a challenge with large dataset pagination. Resolved it by implementing cursor-based pagination with Django REST Framework, which significantly improved performance for clients browsing extensive product lists.',
+                        lessons: 'This project reinforced the importance of careful database indexing for performance and taught me advanced techniques for managing complex many-to-many relationships.'
+                    }
+                },
+                {
+                    id: 'api-integration-app',
+                    title: 'Weather App with API Integration',
+                    short_description: 'A small application that fetches and displays real-time weather data from a public API, demonstrating API consumption and caching.',
+                    hero_image_url: 'https://placehold.co/1100x450/000000/cccccc?text=Weather+App+API+Integration',
+                    github_link: 'https://github.com/your-username/weather-api-app',
+                    live_demo_link: 'https://your-live-demo.com/weather',
+                    is_featured: true,
+                    case_study: {
+                        problem: 'A need to demonstrate proficiency in handling external API requests and data parsing, a crucial skill for modern web development.',
+                        role: 'Solo Developer',
+                        tech_stack: 'Python, Django, Django REST Framework, requests, Cache Framework',
+                        architecture: 'A Django backend that acts as a proxy, fetching data from the OpenWeatherMap API and serving it through its own RESTful endpoint. A caching layer was implemented to minimize API calls.',
+                        key_decisions: 'Utilized Python’s `requests` library to make HTTP calls and Django’s built-in cache framework to store API responses for a set period, improving load times and respecting API rate limits.',
+                        challenges: 'Handling various API error codes (e.g., 404, 500) and gracefully displaying user-friendly messages. This was solved using `try...except` blocks and middleware to catch and log errors.',
+                        lessons: 'Successfully learning API integration was a major milestone. I learned how to handle environment variables for API keys and the importance of caching for performance and reliability.'
+                    }
+                },
+                {
+                    id: 'inventory-management',
+                    title: 'Internal Inventory Tool',
+                    short_description: 'A Django-based admin tool for internal use, providing a custom dashboard and robust data management for a small business.',
+                    hero_image_url: 'https://placehold.co/1100x450/000000/cccccc?text=Inventory+Management+Tool',
+                    github_link: 'https://github.com/your-username/inventory-tool',
+                    live_demo_link: 'https://your-live-demo.com/inventory',
+                    is_featured: false,
+                    case_study: {
+                        problem: 'The client needed a streamlined way to manage and track product inventory and stock levels, which was previously done with spreadsheets.',
+                        role: 'Solo Backend Developer',
+                        tech_stack: 'Python, Django, MySQL, Django Admin',
+                        architecture: 'A custom Django admin interface with a custom dashboard and models tailored for product and stock management. Data is stored in a MySQL database.',
+                        key_decisions: 'Leveraged Django’s powerful built-in admin panel to rapidly build a functional and secure tool, saving significant development time. Implemented custom admin views to display key metrics like low-stock items.',
+                        challenges: 'A key challenge was building a system for granular user permissions. I solved this by leveraging Django\'s groups and permissions system to grant specific users access to certain models and actions.',
+                        lessons: 'This project taught me how to effectively customize and extend the Django Admin interface to create powerful, user-friendly internal tools without building a full frontend from scratch.'
+                    }
+                },
+            ]
+        };
+
+        // --- Simulated "Frontend" Logic ---
+        const pages = document.querySelectorAll('.page-section');
+        const navLinks = document.querySelectorAll('.nav-link');
+        const projectsGrid = document.getElementById('projects-list-grid');
+        const featuredProjectsGrid = document.getElementById('featured-projects-grid');
+        const caseStudyContainer = document.getElementById('case-study-container');
+        
+        // Function to show a specific page
+        function showPage(pageId) {
+            pages.forEach(page => {
+                page.classList.remove('active');
+            });
+            document.getElementById(pageId + '-page').classList.add('active');
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.dataset.page === pageId) {
+                    link.classList.add('active');
+                }
+            });
+        }
+
+        // Function to render all project cards
+        function renderProjects(projects, container) {
+            container.innerHTML = '';
+            projects.forEach(project => {
+                const card = document.createElement('div');
+                card.className = 'project-card';
+                card.innerHTML = `
+                    <img src="https://placehold.co/400x200/222222/bbbbbb?text=${encodeURIComponent(project.title)}" alt="${project.title} Thumbnail" class="project-card-image">
+                    <div class="project-card-content">
+                        <h3>${project.title}</h3>
+                        <p>${project.short_description}</p>
+                    </div>
+                `;
+                card.addEventListener('click', () => {
+                    renderCaseStudy(project);
+                    showPage('case-study');
+                });
+                container.appendChild(card);
+            });
+        }
+
+        // Function to render a single case study page
+        function renderCaseStudy(project) {
+            caseStudyContainer.innerHTML = `
+                <h2>${project.title}</h2>
+                <img src="${project.hero_image_url}" alt="${project.title} Hero Image" style="width:100%; height: auto; border-radius: 8px; margin-bottom: 2rem;">
+                
+                <h3>Problem Statement</h3>
+                <p>${project.case_study.problem}</p>
+                
+                <h3>Your Role & Contributions</h3>
+                <p>${project.case_study.role}</p>
+
+                <h3>Tech Stack</h3>
+                <p>${project.case_study.tech_stack}</p>
+
+                <h3>Architecture & Database Design</h3>
+                <p>${project.case_study.architecture}</p>
+
+                <h3>Key Decisions & Implementation Highlights</h3>
+                <p>${project.case_study.key_decisions}</p>
+
+                <h3>Challenges & Solutions</h3>
+                <p>${project.case_study.challenges}</p>
+
+                <h3>Lessons Learned & Future Improvements</h3>
+                <p>${project.case_study.lessons}</p>
+
+                <div class="case-study-links">
+                    ${project.github_link ? `<a href="${project.github_link}" target="_blank">View on GitHub</a>` : ''}
+                    ${project.live_demo_link ? `<a href="${project.live_demo_link}" target="_blank">Live Demo</a>` : ''}
+                </div>
+            `;
+        }
+
+        // Initial setup on page load
+        window.onload = () => {
+            const featuredProjects = portfolioData.projects.filter(p => p.is_featured);
+            renderProjects(featuredProjects, featuredProjectsGrid);
+            renderProjects(portfolioData.projects, projectsGrid);
+        };
+        
+        // Add event listeners for navigation
+        navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const page = e.target.dataset.page;
+                showPage(page);
+            });
+        });
+        
+    </script>
+</body>
+</html>
