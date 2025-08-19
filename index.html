@@ -337,7 +337,7 @@
                 <h3>My Professional Approach</h3>
                 <p>I believe in writing clean, maintainable, and well-tested code. My focus is on building scalable backend solutions that are not just functional but also performant and secure. I thrive on tackling complex logical challenges and optimizing data flows to deliver seamless user experiences.</p>
                 
-                <h3 style="margin-top: 2rem;">My Familiar Skills</h3>
+                <h3 style="margin-top: 2rem;">My Skills</h3>
                 <div class="skills-grid">
                     <div class="skill-category">
                         <h3>Languages & Frameworks</h3>
@@ -345,7 +345,7 @@
                             <li>Python</li>
                             <li>Django</li>
                             <li>Django REST Framework</li>
-                            <li>JavaScript less practic</li>
+                            <li>JavaScript</li>
                             <li>HTML & CSS</li>
                         </ul>
                     </div>
@@ -353,24 +353,27 @@
                         <h3>Databases</h3>
                         <ul>
                             <li>MySQL</li>
+                            <li>PostgreSQL</li>
                         </ul>
                     </div>
                     <div class="skill-category">
                         <h3>Tools & Platforms</h3>
                         <ul>
                             <li>Git & GitHub</li>
-                            <li>AI (ChatGPT, Gemini, DeepSeek)</li>
+                            <li>Docker</li>
+                            <li>Postman</li>
                             <li>VS Code</li>
+                            <li>Nginx</li>
                         </ul>
                     </div>
                     <div class="skill-category">
                         <h3>Key Backend Concepts</h3>
                         <ul>
-                            <li>API Design (RESTful) going to learn</li>
+                            <li>API Design (RESTful)</li>
                             <li>Authentication & Authorization</li>
-                            <li>ORM & Querying</li>
-                            <li>Shocial Login [Google]</li>
-                            <li>Unit & Integration Testing. Not yet</li>
+                            <li>ORM & Advanced Querying</li>
+                            <li>Asynchronous Tasks</li>
+                            <li>Unit & Integration Testing</li>
                         </ul>
                     </div>
                 </div>
@@ -499,7 +502,7 @@
                 const card = document.createElement('div');
                 card.className = 'project-card';
                 card.innerHTML = `
-                    <img src="https://placehold.co/400x200/222222/bbbbbb?text=${encodeURIComponent(project.title)}" alt="${project.title} Thumbnail" class="project-card-image">
+                    <img src="${project.hero_image_url}" alt="${project.title} Thumbnail" class="project-card-image">
                     <div class="project-card-content">
                         <h3>${project.title}</h3>
                         <p>${project.short_description}</p>
