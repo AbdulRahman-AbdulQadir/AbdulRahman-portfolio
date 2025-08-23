@@ -290,59 +290,43 @@
                 padding: 0.5rem 1rem;
             }
         }
-        /* Modal / Lightbox styles */
-.certificate-modal {
-  position: fixed;
-  inset: 0;
-  display: none; /* toggled by JS */
-  align-items: center;
-  justify-content: center;
-  background: rgba(0,0,0,0.7);
-  z-index: 2000;
-  padding: 20px;
-  backdrop-filter: blur(3px);
-}
-.certificate-modal[aria-hidden="false"] { display: flex; }
 
-.certificate-modal-inner {
-  max-width: 1000px;
-  width: 100%;
-  max-height: 90vh;
-  background: var(--bg-card);
-  border-radius: 12px;
-  padding: 18px;
-  box-shadow: 0 12px 40px rgba(0,0,0,0.6);
-  overflow: auto;
-  position: relative;
-}
-.certificate-modal-inner img {
-  width: 100%;
-  height: auto;
-  object-fit: contain;
-  border-radius: 8px;
-  display: block;
-}
-.certificate-close {
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  background: transparent;
-  border: 1px solid var(--border-color);
-  color: var(--text-light);
-  padding: 6px 10px;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 1rem;
-}
-.certificate-close:hover {
-  background: rgba(0,189,212,0.06);
-  color: var(--accent-blue);
-}
-@media (max-width: 768px) {
-  .certificate-modal-inner { padding: 12px; }
-  .certificate-close { top: 8px; right: 8px; }
-}
-
+        /* Certificate styles (kept simple, no modal/pdf) */
+        .certificate-title {
+            text-align: center;
+            margin-top: 1.5rem;
+            color: var(--accent-blue); /* label color matches other labels */
+            font-size: 1.4rem;
+            margin-bottom: 0.75rem;
+        }
+        .certificate-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            padding: 1rem;
+            border-radius: 12px;
+            max-width: 480px;
+            margin: 0.75rem auto 2rem auto;
+            text-align: center;
+            box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+        }
+        .certificate-image {
+            width: 100%;
+            height: auto;
+            max-height: 360px; /* avoid huge images */
+            object-fit: contain;
+            border-radius: 8px;
+            display: block;
+            margin: 0 auto;
+        }
+        .certificate-caption {
+            color: var(--text-gray);
+            font-size: 0.95rem;
+            margin-top: 0.5rem;
+        }
+        @media (max-width: 480px) {
+            .certificate-card { padding: 0.75rem; max-width: 100%; }
+            .certificate-image { max-height: 240px; }
+        }
     </style>
 </head>
 <body>
@@ -427,36 +411,20 @@
                         </ul>
                     </div>
                 </div>
-               <!-- Certificate block (click-to-enlarge) -->
-<div class="certificate-block" aria-label="Certificate">
-  <h3 style="text-align:center; margin-top:1.5rem;">Certificate</h3>
-  <div class="certificate-card">
-    <!-- NOTE: this image opens the modal -->
-    <img
-      id="certificate-thumb"
-      src="https://raw.githubusercontent.com/AbdulRahman-AbdulQadir/AbdulRahman-portfolio/main/certificate.jpg"
-      alt="Certificate of Completion — Django Backend Development"
-      class="certificate-image"
-      loading="lazy"
-      style="cursor: zoom-in;"
-    />
-    <p class="certificate-caption">Certificate: <strong>Django Backend Development</strong></p>
-    <p style="text-align:center; margin-top:0.25rem;">
-      <a id="certificate-pdf-link" href="https://raw.githubusercontent.com/AbdulRahman-AbdulQadir/AbdulRahman-portfolio/main/AbdulRahman-Coding-Certificate.pdf" target="_blank" rel="noopener" class="case-study-links">View PDF</a>
-    </p>
-  </div>
-</div>
 
-<!-- Modal / Lightbox for certificate -->
-<div id="certificate-modal" class="certificate-modal" aria-hidden="true" role="dialog" aria-label="Certificate preview">
-  <div class="certificate-modal-inner" role="document">
-    <button id="certificate-close" class="certificate-close" aria-label="Close certificate preview">✕</button>
-    <img id="certificate-modal-img" src="" alt="Enlarged certificate" />
-    <p style="text-align:center; margin-top:12px;">
-      <a id="modal-pdf-link" href="https://raw.githubusercontent.com/AbdulRahman-AbdulQadir/AbdulRahman-portfolio/main/AbdulRahman-Coding-Certificate.pdf" target="_blank" rel="noopener" class="case-study-links">Open PDF</a>
-    </p>
-  </div>
-</div>
+                <!-- Certificate block (static image, no PDF, no modal) -->
+                <div class="certificate-block" aria-label="Certificate">
+                  <h3 class="certificate-title">Certificate</h3>
+                  <div class="certificate-card">
+                    <img
+                      src="https://raw.githubusercontent.com/AbdulRahman-AbdulQadir/AbdulRahman-portfolio/main/certificate.jpg"
+                      alt="Certificate of Completion — Django Backend Development"
+                      class="certificate-image"
+                      loading="lazy"
+                    />
+                    <p class="certificate-caption">Certificate: <strong>Django Backend Development</strong></p>
+                  </div>
+                </div>
 
             </div>
         </section>
@@ -646,47 +614,6 @@
                 showPage(page);
             });
         });
-        document.addEventListener('DOMContentLoaded', () => {
-  const thumb = document.getElementById('certificate-thumb');
-  const modal = document.getElementById('certificate-modal');
-  const modalImg = document.getElementById('certificate-modal-img');
-  const closeBtn = document.getElementById('certificate-close');
-  const pdfLink = document.getElementById('certificate-pdf-link');
-  const modalPdfLink = document.getElementById('modal-pdf-link');
-
-  if (!thumb || !modal || !modalImg || !closeBtn) return;
-
-  // Open modal
-  thumb.addEventListener('click', () => {
-    modalImg.src = thumb.src;
-    modal.setAttribute('aria-hidden', 'false');
-    document.body.style.overflow = 'hidden'; // prevent background scroll
-    // sync PDF link (in case user changes)
-    modalPdfLink.href = pdfLink.href;
-  });
-
-  // Close helpers
-  function closeModal() {
-    modal.setAttribute('aria-hidden', 'true');
-    document.body.style.overflow = ''; // restore scroll
-    // small timeout to clear src to free memory on mobile
-    setTimeout(() => modalImg.removeAttribute('src'), 200);
-  }
-
-  closeBtn.addEventListener('click', closeModal);
-
-  // Click outside the modalInner closes modal
-  modal.addEventListener('click', (e) => {
-    if (e.target === modal) closeModal();
-  });
-
-  // Escape key closes modal
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && modal.getAttribute('aria-hidden') === 'false') {
-      closeModal();
-    }
-  });
-});
     </script>
 </body>
 </html>
