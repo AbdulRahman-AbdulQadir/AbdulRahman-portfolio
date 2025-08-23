@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Abdulrahman | Backend Developer Portfolio</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -241,11 +241,9 @@
         /* Styles for skill lists */
         .skills-grid {
             display: grid;
-            /* 3 columns on desktop, auto-fit smaller screens */
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 1.5rem;
             margin-top: 1.5rem;
-            align-items: start;
         }
 
         .skill-category h3 {
@@ -276,39 +274,6 @@
             margin-right: 10px;
         }
 
-        /* Certificate inside skills grid */
-        .certificate-category {
-            text-align: center;
-        }
-        .certificate-category h3 {
-            font-size: 1.25rem;
-            color: var(--accent-blue); /* matches other labels */
-            margin-bottom: 0.75rem;
-        }
-        .certificate-thumb-card {
-            background-color: var(--bg-card);
-            border: 1px solid var(--border-color);
-            padding: 0.75rem;
-            border-radius: 10px;
-            max-width: 360px;
-            margin: 0 auto;
-            box-shadow: 0 6px 16px rgba(0,0,0,0.22);
-        }
-        .certificate-thumb-card img {
-            width: 100%;
-            height: auto;
-            max-height: 220px;
-            object-fit: contain;
-            border-radius: 6px;
-            display: block;
-            margin: 0 auto;
-        }
-        .certificate-thumb-caption {
-            color: var(--text-gray);
-            font-size: 0.9rem;
-            margin-top: 0.5rem;
-        }
-
         footer {
             text-align: center;
             padding: 2rem 0;
@@ -324,15 +289,43 @@
             nav a {
                 padding: 0.5rem 1rem;
             }
-            .certificate-thumb-card img {
-                max-height: 180px;
-            }
         }
 
-        @media (max-width: 420px) {
-            .certificate-thumb-card img {
-                max-height: 140px;
-            }
+        /* Certificate styles (kept simple, no modal/pdf) */
+        .certificate-title {
+            text-align: center;
+            margin-top: 1.5rem;
+            color: var(--accent-blue); /* label color matches other labels */
+            font-size: 1.4rem;
+            margin-bottom: 0.75rem;
+        }
+        .certificate-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            padding: 1rem;
+            border-radius: 12px;
+            max-width: 480px;
+            margin: 0.75rem auto 2rem auto;
+            text-align: center;
+            box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+        }
+        .certificate-image {
+            width: 100%;
+            height: auto;
+            max-height: 360px; /* avoid huge images */
+            object-fit: contain;
+            border-radius: 8px;
+            display: block;
+            margin: 0 auto;
+        }
+        .certificate-caption {
+            color: var(--text-gray);
+            font-size: 0.95rem;
+            margin-top: 0.5rem;
+        }
+        @media (max-width: 480px) {
+            .certificate-card { padding: 0.75rem; max-width: 100%; }
+            .certificate-image { max-height: 240px; }
         }
     </style>
 </head>
@@ -382,27 +375,23 @@
                 <p>I like to learn more in writing clean, maintainable, and well-tested code. My focus is on building scalable backend solutions that are not just functional but also performant and secure. I thrive to be on tackling complex logical challenges and optimizing data flows to deliver seamless user experiences.</p>
                 
                 <h3 style="margin-top: 2rem;">My Familiar Skills</h3>
-
-                <!-- Skills grid now includes certificate as one column -->
                 <div class="skills-grid">
                     <div class="skill-category">
                         <h3>Languages & Frameworks</h3>
                         <ul>
                             <li>Python</li>
                             <li>Django</li>
-                            <li>Django REST Framework going to learn</li>
+                            <li>Django REST Framework going to learn </li>
                             <li>JavaScript less practic</li>
                             <li>HTML & CSS</li>
                         </ul>
                     </div>
-
                     <div class="skill-category">
                         <h3>Databases</h3>
                         <ul>
                             <li>MySQL</li>
                         </ul>
                     </div>
-
                     <div class="skill-category">
                         <h3>Tools & Platforms</h3>
                         <ul>
@@ -411,7 +400,6 @@
                             <li>VS Code</li>
                         </ul>
                     </div>
-
                     <div class="skill-category">
                         <h3>Key Backend Concepts</h3>
                         <ul>
@@ -422,21 +410,21 @@
                             <li>Shocial Login [Google]</li>
                         </ul>
                     </div>
-
-                    <!-- Certificate inside the same grid so it sits next to skills -->
-                    <div class="certificate-category">
-                        <h3>Certificate</h3>
-                        <div class="certificate-thumb-card" aria-label="Certificate">
-                            <img
-                              src="https://raw.githubusercontent.com/AbdulRahman-AbdulQadir/AbdulRahman-portfolio/main/certificate.jpg"
-                              alt="Certificate of Completion — Django Backend Development"
-                              loading="lazy"
-                            />
-                            <div class="certificate-thumb-caption">Django Backend Development</div>
-                        </div>
-                    </div>
                 </div>
-                <!-- end skills-grid -->
+
+                <!-- Certificate block (static image, no PDF, no modal) -->
+                <div class="certificate-block" aria-label="Certificate">
+                  <h3 class="certificate-title">Certificate</h3>
+                  <div class="certificate-card">
+                    <img
+                      src="https://raw.githubusercontent.com/AbdulRahman-AbdulQadir/AbdulRahman-portfolio/main/certificate.jpg"
+                      alt="Certificate of Completion — Django Backend Development"
+                      class="certificate-image"
+                      loading="lazy"
+                    />
+                    <p class="certificate-caption">Certificate: <strong>Django Backend Development</strong></p>
+                  </div>
+                </div>
 
             </div>
         </section>
@@ -468,12 +456,13 @@
 
     <footer>
         <div class="container">
-            <p>&copy; 2024 Abdulrahman. All rights reserved.</p>
+            <p>&copy; 2024 AbdulRahman. All rights reserved.</p>
         </div>
     </footer>
 
     <script>
         // --- Simulated "Backend" Data ---
+        // This object represents the data a Django backend would serve via an API or Django template views.
         const portfolioData = {
             projects: [
                 {
@@ -482,6 +471,7 @@
                     short_description: 'Backend for an e-commerce site using Django and Python. Implements product catalog, shopping cart, orders, and register. order comming soon. Also handling authentications',
                     hero_image_url: 'https://raw.githubusercontent.com/AbdulRahman-AbdulQadir/AbdulRahman-portfolio/main/Eco_img.jpg',
                     github_link: 'https://github.com/AbdulRahman-AbdulQadir/Django_Team_Store',
+                    // live_demo_link: 'https://your-live-demo.com/ecommerce',
                     is_featured: true,
                     case_study: {
                         problem: 'How to build good ecommerce website ',
@@ -541,9 +531,17 @@
         
         // Function to show a specific page
         function showPage(pageId) {
-            pages.forEach(page => page.classList.remove('active'));
+            pages.forEach(page => {
+                page.classList.remove('active');
+            });
             document.getElementById(pageId + '-page').classList.add('active');
-            navLinks.forEach(link => link.classList.toggle('active', link.dataset.page === pageId));
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.dataset.page === pageId) {
+                    link.classList.add('active');
+                }
+            });
         }
 
         // Function to render all project cards
@@ -612,7 +610,7 @@
         navLinks.forEach(link => {
             link.addEventListener('click', (e) => {
                 e.preventDefault();
-                const page = e.currentTarget.dataset.page;
+                const page = e.target.dataset.page;
                 showPage(page);
             });
         });
