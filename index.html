@@ -1444,13 +1444,31 @@
     ];
 
     projects.forEach((project, index) => {
-      const [a, b] = projectColors[index % projectColors.length];
-      project.thumb = svgImage(project.title, project.description, a, b, project.category);
-      project.screenshots = project.screenshots.map((shot, shotIndex) => ({
-        ...shot,
-        src: svgImage(`${project.title} — Screenshot ${shotIndex + 1}`, shot.caption, a, b, `View ${shotIndex + 1}`)
-      }));
-    });
+  const [a, b] = projectColors[index % projectColors.length];
+
+  // Only create SVG thumbnail if no real image exists
+  if (!project.thumb) {
+    project.thumb = svgImage(
+      project.title,
+      project.description,
+      a,
+      b,
+      project.category
+    );
+  }
+
+  // Only create SVG screenshot if no real screenshot exists
+  project.screenshots = project.screenshots.map((shot, shotIndex) => ({
+    ...shot,
+    src: shot.src || svgImage(
+      `${project.title} — Screenshot ${shotIndex + 1}`,
+      shot.caption,
+      a,
+      b,
+      `View ${shotIndex + 1}`
+    )
+  }));
+});
 
     const projectsGrid = document.getElementById("projectsGrid");
     const modal = document.getElementById("projectModal");
