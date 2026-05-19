@@ -173,7 +173,9 @@
     }
 
     .mobile-nav-inner{
-      display:grid;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
       gap:8px;
       padding:10px;
       border-radius:16px;
@@ -182,13 +184,19 @@
       box-shadow:0 10px 25px rgba(0,0,0,.25);
     }
     .mobile-nav-inner a{
-      padding:10px 12px;
+      flex:1;
+      text-align:center;
+      padding:10px 8px;
       border-radius:12px;
       background:rgba(255,255,255,.03);
       color:var(--text);
       font-weight:600;
-      font-size:.92rem;
+      font-size:.85rem;
       transition:background .25s ease, transform .25s ease;
+    }
+
+    .mobile-nav-inner a:hover{
+    background:rgba(255,255,255,.07);
     }
 
     .mobile-nav-inner a:hover{
